@@ -1,0 +1,6 @@
+module Pods_AppTodoMovies4_AppTodoMovies4UITests {
+  umbrella header "Pods-AppTodoMovies4-AppTodoMovies4UITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
