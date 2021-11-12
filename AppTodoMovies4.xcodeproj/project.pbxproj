@@ -10,9 +10,6 @@
 		51B75B0AFCF9E09DAF5487A4 /* libPods-AppTodoMovies4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7287BC3AF1FC3E30F572427C /* libPods-AppTodoMovies4.a */; };
 		AE888ACA830A9D7EC75A1730 /* libPods-AppTodoMovies4Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D2BC5A9EF9E2F254E9A2B6 /* libPods-AppTodoMovies4Tests.a */; };
 		C970790718D07A2CFD27C624 /* libPods-AppTodoMovies4-AppTodoMovies4UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F53AE6ECCDCE6964F40E3C1 /* libPods-AppTodoMovies4-AppTodoMovies4UITests.a */; };
-		F359BE22273EA323005DD0B0 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F359BE21273EA323005DD0B0 /* BaseCoordinator.swift */; };
-		F359BE27273EA350005DD0B0 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F359BE26273EA350005DD0B0 /* Coordinator.swift */; };
-		F359BE2C273EA4DF005DD0B0 /* CoordinatorConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F359BE2B273EA4DF005DD0B0 /* CoordinatorConfiguration.swift */; };
 		F3EBA98C273E9891006D48E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EBA98B273E9891006D48E8 /* AppDelegate.swift */; };
 		F3EBA98E273E9891006D48E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EBA98D273E9891006D48E8 /* SceneDelegate.swift */; };
 		F3EBA990273E9891006D48E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EBA98F273E9891006D48E8 /* ViewController.swift */; };
@@ -48,9 +45,6 @@
 		7C8F7D7B3CD6BCC67AB8B81E /* Pods-AppTodoMovies4.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppTodoMovies4.release.xcconfig"; path = "Target Support Files/Pods-AppTodoMovies4/Pods-AppTodoMovies4.release.xcconfig"; sourceTree = "<group>"; };
 		A2D2BC5A9EF9E2F254E9A2B6 /* libPods-AppTodoMovies4Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppTodoMovies4Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B70A279B3B3833E0E49B0908 /* Pods-AppTodoMovies4-AppTodoMovies4UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppTodoMovies4-AppTodoMovies4UITests.debug.xcconfig"; path = "Target Support Files/Pods-AppTodoMovies4-AppTodoMovies4UITests/Pods-AppTodoMovies4-AppTodoMovies4UITests.debug.xcconfig"; sourceTree = "<group>"; };
-		F359BE21273EA323005DD0B0 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
-		F359BE26273EA350005DD0B0 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		F359BE2B273EA4DF005DD0B0 /* CoordinatorConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorConfiguration.swift; sourceTree = "<group>"; };
 		F3EBA988273E9891006D48E8 /* AppTodoMovies4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppTodoMovies4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3EBA98B273E9891006D48E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3EBA98D273E9891006D48E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,21 +117,18 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		F359BE1F273EA2DA005DD0B0 /* View */ = {
+		F359BE1F273EA2DA005DD0B0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F359BE36273ECEB4005DD0B0 /* View */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		F359BE20273EA2F2005DD0B0 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				F359BE21273EA323005DD0B0 /* BaseCoordinator.swift */,
-				F359BE26273EA350005DD0B0 /* Coordinator.swift */,
-				F359BE2B273EA4DF005DD0B0 /* CoordinatorConfiguration.swift */,
-			);
-			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		F3EBA97F273E9891006D48E8 = {
@@ -165,8 +156,8 @@
 		F3EBA98A273E9891006D48E8 /* AppTodoMovies4 */ = {
 			isa = PBXGroup;
 			children = (
-				F359BE20273EA2F2005DD0B0 /* Coordinator */,
-				F359BE1F273EA2DA005DD0B0 /* View */,
+				F359BE36273ECEB4005DD0B0 /* View */,
+				F359BE1F273EA2DA005DD0B0 /* ViewModel */,
 				F359BE1E273EA242005DD0B0 /* Model */,
 				F3EBA98B273E9891006D48E8 /* AppDelegate.swift */,
 				F3EBA98D273E9891006D48E8 /* SceneDelegate.swift */,
@@ -397,10 +388,7 @@
 			files = (
 				F3EBA990273E9891006D48E8 /* ViewController.swift in Sources */,
 				F3EBA98C273E9891006D48E8 /* AppDelegate.swift in Sources */,
-				F359BE27273EA350005DD0B0 /* Coordinator.swift in Sources */,
 				F3EBA98E273E9891006D48E8 /* SceneDelegate.swift in Sources */,
-				F359BE22273EA323005DD0B0 /* BaseCoordinator.swift in Sources */,
-				F359BE2C273EA4DF005DD0B0 /* CoordinatorConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
