@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import UIKit
+
+public protocol Coordinator: AnyObject {
+    func navigate(to viewController: UIViewController)
+}
