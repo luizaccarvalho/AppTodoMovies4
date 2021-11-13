@@ -7,6 +7,19 @@
 
 import Foundation
 
+struct Results: Codable {
+    let results: [Movie]
+    
+    enum CodingKeys: String, CodingKey {
+        case results = "results"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        results = try values.decode([Movie].self, forKey: .results)
+    }
+}
+
 struct Movie: Codable {
     let backdropPath: String?
     let genres: [Genres]?
