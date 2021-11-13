@@ -6,7 +6,9 @@ target 'AppTodoMovies4' do
   #use_frameworks!
 
   # Pods for AppTodoMovies4
-	pod 'Alamofire'	
+	pod 'Alamofire'
+	pod 'RxSwift', '~> 5'
+    	pod 'RxCocoa', '~> 5'
   target 'AppTodoMovies4Tests' do
     inherit! :search_paths
     # Pods for testing
