@@ -7,16 +7,30 @@
 
 import Foundation
 
-public struct Movie: Codable {
-    let originalTitle: String
-    let popularity: Float
-    let voteCount: Int
-    let backdropPath: String
+struct Movie: Codable {
+    let backdropPath: String?
+    let genres: [Genres]?
+    let id: Int?
+    let originalTitle: String?
+    let popularity: Double?
+    let voteCount: Int?
     
     enum CodingKeys: String, CodingKey {
-        case originalTitle = "original_title"
-        case popularity
-        case voteCount = "vote_count"
         case backdropPath = "backdrop_path"
+        case genres = "genres"
+        case id = "id"
+        case originalTitle = "original_title"
+        case popularity = "popularity"
+        case voteCount = "vote_count"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        backdropPath = try values.decodeIfPresent(String.self, forKey: .backdropPath)
+        genres = try values.decodeIfPresent([Genres].self, forKey: .genres)
+        id = try values.decodeIfPresent(Int.self, forKey: .id)
+        originalTitle = try values.decodeIfPresent(String.self, forKey: .originalTitle)
+        popularity = try values.decodeIfPresent(Double.self, forKey: .popularity)
+        voteCount = try values.decodeIfPresent(Int.self, forKey: .voteCount)
     }
 }

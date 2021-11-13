@@ -6,34 +6,15 @@
 //
 
 import UIKit
-import Alamofire
-import RxSwift
 
 class ViewController: UIViewController {
-    public weak var viewModel: MovieViewModelDelegate?
-    let disposeBag = DisposeBag()
+    var viewModelMovie = MovieViewModel()
     
-    lazy var titleOriginal: UILabel = {
-        let label = UILabel()
-        //label.text = movie.originalTitle
-        label.textColor = .red
-        return label
-    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        viewModel?.request()
-        bindObservable()
-
-        view.addSubview(titleOriginal)
-    }
-    
-    private func bindObservable() {
-        viewModel?.movie.subscribeOnMain(by: disposeBag) { [weak self] data in
-            guard let self = self else { return }
-            self.titleOriginal.text = data.originalTitle
-        }
+ 
+        view.backgroundColor = .blue
+        viewModelMovie.getAllMoviesData()
     }
 }
 
