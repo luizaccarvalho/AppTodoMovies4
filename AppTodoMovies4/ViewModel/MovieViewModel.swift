@@ -9,31 +9,24 @@ import Alamofire
 import UIKit
 
 class MovieViewModel {
-    
-    weak var vc: ViewController?
-    var similiarMovies = [Movie]()
-    
-    func getAllMoviesData() {
-        let urlAllMovies = "https://api.themoviedb.org/3/movie/550/similar?api_key=86467ac62053912b101b62a63bb02660&language=en-US&page=1"
         
-        URLSession.shared.dataTask(with: URL(string: urlAllMovies)!) { (data, response, error)
-            in
-            if error == nil {
-                if let data = data {
-                    do {
-                        let moviesResponse = try
-                            JSONDecoder().decode(Results.self, from: data)
-//                        for modelMovies in moviesResponse.results{
-//                            self.similiarMovies.append(modelMovies)
-//                        }
-                        self.similiarMovies.append(contentsOf: moviesResponse.results)
-                        print(self.similiarMovies)
-                    } catch let error {
-                        print(error.localizedDescription)
-                    }
-                }
-            } else {
-                print(error?.localizedDescription)
+    func getAllMoviesData(completion: @escaping ([Movie]?, Error?) -> ()) {
+        guard let urlAllMovies =
+                URL(string: "https://api.themoviedb.org/3/movie/550/similar?api_key=86467ac62053912b101b62a63bb02660&language=en-US&page=1")
+        else { return }
+        
+        URLSession.shared.dataTask(with: urlAllMovies) { (data, response, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            do {
+                guard let data = data else { return }
+                let movieResponse = try JSONDecoder().decode(Results.self, from: data)
+                completion(movieResponse.results, nil)
+            } catch let error {
+                completion(nil, error)
+                return
             }
         }.resume()
     }
@@ -47,12 +40,12 @@ class MovieViewModel {
                 if let data = data {
                     do {
                         let movieResponse = try
-                            JSONDecoder().decode(Results.self, from: data)
+                            JSONDecoder().decode(Movie.self, from: data)
 //                        for modelMovies in moviesResponse.results{
 //                            self.similiarMovies.append(modelMovies)
 //                        }
 //                        self.movie = movieResponse
-//                        print(self.movie)
+                        print(movieResponse)
                     } catch let error {
                         print(error.localizedDescription)
                     }
