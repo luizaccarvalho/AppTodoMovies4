@@ -13,17 +13,22 @@ class MovieCell: UITableViewCell {
             titleLabel.text = movie.originalTitle
             titleGenreLabel.text = "Genero"
             
-            //TODO: verificar pq esta dando erro
-//            DispatchQueue.main.async {
-//                if let url = URL(string: self.movie.backdropPath!) {
-//                    do {
-//                        let data = try Data(contentsOf: url)
-//                        self.iconeImageView.image = UIImage(data: data)
-//                    } catch {
-//                        print(error)
-//                    }
-//                }
-//            }
+            //TODO: verificar quando vier null
+            DispatchQueue.main.async {
+                let baseUrl = "https://image.tmdb.org/t/p/w500"
+                let posterUrl = "\(self.movie.posterPath ?? "")"
+
+                let teste = "\(baseUrl)\(posterUrl)"
+                
+                if let url = URL(string: teste) {
+                    do {
+                        let data = try Data(contentsOf: url)
+                        self.iconeImageView.image = UIImage(data: data)
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
         }
     }
     
