@@ -31,28 +31,45 @@ class MovieViewModel {
         }.resume()
     }
     
-    func getMovieData() {
-        let urlMovie = "https://api.themoviedb.org/3/movie/550?api_key=86467ac62053912b101b62a63bb02660"
-
-        URLSession.shared.dataTask(with: URL(string: urlMovie)!) { (data, response, error)
-            in
-            if error == nil {
-                if let data = data {
-                    do {
-                        let movieResponse = try
-                            JSONDecoder().decode(Movie.self, from: data)
-//                        for modelMovies in moviesResponse.results{
-//                            self.similiarMovies.append(modelMovies)
-//                        }
-//                        self.movie = movieResponse
-                        print(movieResponse)
-                    } catch let error {
-                        print(error.localizedDescription)
-                    }
-                }
-            } else {
-                print(error?.localizedDescription)
+    func getMovieData(completion: @escaping (Movie?, Error?) -> ()) {
+        guard let urlDetailMovie =
+                URL(string: "https://api.themoviedb.org/3/movie/550?api_key=86467ac62053912b101b62a63bb02660")
+        else { return }
+        
+        URLSession.shared.dataTask(with: urlDetailMovie) { (data, response, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            do {
+                guard let data = data else { return }
+                let movieResponse = try JSONDecoder().decode(Movie.self, from: data)
+                completion(movieResponse, nil)
+            } catch let error {
+                completion(nil, error)
+                return
             }
         }.resume()
     }
+    
+//    func getAllGenres(completion: @escaping ([Genres]?, Error?) -> ()) {
+//        guard let urlGenres =
+//                URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=86467ac62053912b101b62a63bb02660")
+//        else { return }
+//
+//        URLSession.shared.dataTask(with: urlGenres) { (data, response, error) in
+//            if let error = error {
+//                completion(nil, error)
+//                return
+//            }
+//            do {
+//                guard let data = data else { return }
+//                let genresResponse = try JSONDecoder().decode([Genres].self, from: data)
+//                completion(genresResponse, nil)
+//            } catch let error {
+//                completion(nil, error)
+//                return
+//            }
+//        }.resume()
+//    }
 }

@@ -12,6 +12,7 @@ class MovieCell: UITableViewCell {
         didSet {
             titleLabel.text = movie.originalTitle
             titleGenreLabel.text = "Genero"
+            dateLabel.text = movie.releaseDate
             
             //TODO: verificar quando vier null
             DispatchQueue.main.async {
@@ -32,19 +33,20 @@ class MovieCell: UITableViewCell {
         }
     }
     
-    let iconeImageView: UIImageView = .iconeImageView()
-    let titleLabel: UILabel = .textLabel(text: "App nome", fontSize: 18, numberOfLines: 2)
-    let titleGenreLabel: UILabel = .textLabel(text: "Genero", fontSize: 14)
-    
+    let iconeImageView: UIImageView = .iconeImageView(width: 100, height: 200)
+    let titleLabel: UILabel = .textLabel(text: "App nome", fontSize: 16, numberOfLines: 2)
+    let titleGenreLabel: UILabel = .textLabel(text: "Genero", fontSize: 12)
+    let dateLabel: UILabel = .textLabel(text: "data", fontSize: 12)
+        
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        let titleGenreStackView = UIStackView(arrangedSubviews: [titleLabel, titleGenreLabel])
-        titleGenreStackView.spacing = 8
-        titleGenreStackView.axis = .vertical
+        let titleGenreStackView = UIStackView(arrangedSubviews: [titleLabel, titleGenreLabel, dateLabel])
+        titleGenreStackView.spacing = 5
+        titleGenreStackView.axis = .horizontal
         
-        let stackView = UIStackView(arrangedSubviews: [iconeImageView, titleLabel, titleGenreLabel])
-        stackView.spacing = 12
+        let stackView = UIStackView(arrangedSubviews: [iconeImageView, titleLabel, titleGenreLabel, dateLabel])
+        stackView.spacing = 25
         stackView.alignment = .center
         
         addSubview(stackView)

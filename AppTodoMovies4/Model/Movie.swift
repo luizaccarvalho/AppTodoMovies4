@@ -28,6 +28,8 @@ struct Movie: Codable {
     let originalTitle: String?
     let popularity: Double?
     let voteCount: Int?
+    let genreIds: [Int]?
+    let releaseDate: String?
     
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
@@ -37,6 +39,8 @@ struct Movie: Codable {
         case originalTitle = "original_title"
         case popularity = "popularity"
         case voteCount = "vote_count"
+        case genreIds = "genre_ids"
+        case releaseDate = "release_date"
     }
     
     init(from decoder: Decoder) throws {
@@ -48,5 +52,7 @@ struct Movie: Codable {
         originalTitle = try values.decodeIfPresent(String.self, forKey: .originalTitle)
         popularity = try values.decodeIfPresent(Double.self, forKey: .popularity)
         voteCount = try values.decodeIfPresent(Int.self, forKey: .voteCount)
+        genreIds = try values.decodeIfPresent([Int].self, forKey: .genreIds)
+        releaseDate = try values.decodeIfPresent(String.self, forKey: .releaseDate)
     }
 }

@@ -13,7 +13,7 @@ extension UIImageView {
         image.size(size: .init(width: width, height: width))
         image.layer.borderWidth = 0.5
         image.layer.borderColor = UIColor(white: 0.5, alpha: 0.5).cgColor
-        image.layer.cornerRadius = 12
+        image.layer.cornerRadius = 0
         image.clipsToBounds = true
         
         return image

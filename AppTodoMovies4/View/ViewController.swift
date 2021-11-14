@@ -8,22 +8,24 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var viewModelMovie = MovieViewModel()
+
     let tableView = UITableView()
-    let detailMovie = UIView()
+    var detailView: UIView = MovieDetails(frame: CGRect.zero)
     var safeArea: UILayoutGuide!
     
-    var viewModelMovie = MovieViewModel()
     var similarMovies: [Movie] = []
+    var allGenres: [Genres] = []
+    var movieDetails: Movie?
     
     let cellId = "cellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+                
         safeArea = view.layoutMarginsGuide
         setupViews()
-        
-        viewModelMovie.getMovieData()
 
         viewModelMovie.getAllMoviesData { (movies, err) in
             if let movies = movies {
@@ -31,14 +33,23 @@ class ViewController: UIViewController {
                     self.similarMovies = movies
                     self.tableView.reloadData()
                 }
-                print(movies)
+                //print(movies)
             }
         }
         tableView.dataSource = self
+        
+//        viewModelMovie.getAllGenres { (genres, error) in
+//            if let genres = genres {
+//                DispatchQueue.main.async {
+//                    self.allGenres = genres
+//                }
+//                print(genres)
+//            }
+//        }
     }
     
     func setupViews() {
-        let stackView: UIStackView = UIStackView(arrangedSubviews: [detailMovie, tableView])
+        let stackView: UIStackView = UIStackView(arrangedSubviews: [detailView, tableView])
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
         
@@ -54,6 +65,10 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return .init(tableView.bounds.width * 0.8)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return similarMovies.count
     }
@@ -64,4 +79,3 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
 }
-
