@@ -9,43 +9,24 @@ import UIKit
 
 class ViewController: UIViewController {
     var viewModelMovie = MovieViewModel()
-
+    
     let tableView = UITableView()
     var detailView: UIView = MovieDetails(frame: CGRect.zero)
     var safeArea: UILayoutGuide!
     
     var similarMovies: [Movie] = []
-    var allGenres: [Genres] = []
+    var allGenres: [Genre] = []
     var movieDetails: Movie?
     
     let cellId = "cellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .black
                 
         safeArea = view.layoutMarginsGuide
         setupViews()
-
-        viewModelMovie.getAllMoviesData { (movies, err) in
-            if let movies = movies {
-                DispatchQueue.main.async {
-                    self.similarMovies = movies
-                    self.tableView.reloadData()
-                }
-                //print(movies)
-            }
-        }
-        tableView.dataSource = self
-        
-//        viewModelMovie.getAllGenres { (genres, error) in
-//            if let genres = genres {
-//                DispatchQueue.main.async {
-//                    self.allGenres = genres
-//                }
-//                print(genres)
-//            }
-//        }
+        getAllMovies()
     }
     
     func setupViews() {
@@ -55,18 +36,30 @@ class ViewController: UIViewController {
         
         view.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         tableView.register(MovieCell.self, forCellReuseIdentifier: cellId)
     }
+    
+    func getAllMovies() {
+        viewModelMovie.getAllMoviesData { (movies, err) in
+            if let movies = movies {
+                DispatchQueue.main.async {
+                    self.similarMovies = movies
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        tableView.dataSource = self
+    }
 }
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return .init(tableView.bounds.width * 0.8)
+        return .init(10)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,6 +69,8 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MovieCell
         cell.movie = self.similarMovies[indexPath.item]
+        cell.layer.borderWidth = CGFloat(6)
+        cell.layer.borderColor = tableView.backgroundColor?.cgColor
         return cell
     }
 }

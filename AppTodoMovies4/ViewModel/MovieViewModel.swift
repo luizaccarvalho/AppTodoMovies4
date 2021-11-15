@@ -52,24 +52,24 @@ class MovieViewModel {
         }.resume()
     }
     
-//    func getAllGenres(completion: @escaping ([Genres]?, Error?) -> ()) {
-//        guard let urlGenres =
-//                URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=86467ac62053912b101b62a63bb02660")
-//        else { return }
-//
-//        URLSession.shared.dataTask(with: urlGenres) { (data, response, error) in
-//            if let error = error {
-//                completion(nil, error)
-//                return
-//            }
-//            do {
-//                guard let data = data else { return }
-//                let genresResponse = try JSONDecoder().decode([Genres].self, from: data)
-//                completion(genresResponse, nil)
-//            } catch let error {
-//                completion(nil, error)
-//                return
-//            }
-//        }.resume()
-//    }
+    func getAllGenres(completion: @escaping ([Genre]?, Error?) -> ()) {
+        guard let urlGenres =
+                URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=86467ac62053912b101b62a63bb02660")
+        else { return }
+
+        URLSession.shared.dataTask(with: urlGenres) { (data, response, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            do {
+                guard let data = data else { return }
+                let genresResponse = try JSONDecoder().decode(Genres.self, from: data)
+                completion(genresResponse.genres, nil)
+            } catch let error {
+                completion(nil, error)
+                return
+            }
+        }.resume()
+    }
 }

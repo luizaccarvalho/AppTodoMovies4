@@ -23,7 +23,7 @@ struct Results: Codable {
 struct Movie: Codable {
     let backdropPath: String?
     let posterPath: String?
-    let genres: [Genres]?
+    let genres: [Genre]?
     let id: Int?
     let originalTitle: String?
     let popularity: Double?
@@ -47,7 +47,7 @@ struct Movie: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         backdropPath = try values.decodeIfPresent(String.self, forKey: .backdropPath)
         posterPath = try values.decodeIfPresent(String.self, forKey: .posterPath)
-        genres = try values.decodeIfPresent([Genres].self, forKey: .genres)
+        genres = try values.decodeIfPresent([Genre].self, forKey: .genres)
         id = try values.decodeIfPresent(Int.self, forKey: .id)
         originalTitle = try values.decodeIfPresent(String.self, forKey: .originalTitle)
         popularity = try values.decodeIfPresent(Double.self, forKey: .popularity)

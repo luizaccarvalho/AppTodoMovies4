@@ -8,6 +8,19 @@
 import Foundation
 
 struct Genres: Codable {
+    let genres: [Genre]
+    
+    enum CodingKeys: String, CodingKey {
+        case genres = "genres"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        genres = try values.decode([Genre].self, forKey: .genres)
+    }
+}
+
+struct Genre: Codable {
     let id: Int?
     let name: String?
     
