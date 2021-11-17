@@ -12,7 +12,7 @@ class MovieDetails: UIView {
     var movieDetails: Movie?
     
     let bannerImageView: UIImageView = .iconeImageView(width: 220, height: 320)
-    let iconFavorite = UIImageView.iconeImageView(width: 24, height: 24)
+    let iconFavorite: UIButton = UIButton()
     let titleLabel: UILabel = .textLabel(text: "Title Movie", fontSize: 25, numberOfLines: 2)
     let iconPopularity = UIImageView.iconeImageView(width: 14, height: 14)
     let popularityLabel: UILabel = .textLabel(text: "Popularity", fontSize: 12)
@@ -24,7 +24,11 @@ class MovieDetails: UIView {
 
         findMovie()
                 
-        iconFavorite.image = UIImage(named: "favorite")
+        let imageFavorite = UIImage(named: "favorite")
+        let imageFavoriteBorder = UIImage(named: "favorite-border")
+        iconFavorite.setImage(imageFavorite, for: .normal)
+        iconFavorite.setImage(imageFavoriteBorder, for: .highlighted)
+        
         iconPopularity.image = UIImage(named: "star")
         iconVoteCount.image = UIImage(named: "favorite")
         
