@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     var viewModelMovie = MovieViewModel()
     
     let tableView = UITableView()
-    var detailView: UIView = MovieDetails(frame: CGRect.zero)
+    var detailView: UIView = MovieDetailsView(frame: CGRect.zero)
     var safeArea: UILayoutGuide!
     
     var similarMovies: [Movie] = []

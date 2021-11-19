@@ -79,30 +79,36 @@ class MovieCell: UITableViewCell {
     
     func setupCellGenre() -> String {
         findAllGenres()
-        
-        var genres: String = ""
-        
+                
         for id in movie?.genreIds ?? [] {
             if let genre = allGenres.firstIndex(where: { $0.id == id}) {
                 moviesGenres.append(allGenres[genre])
             }
         }
-        
-        for movieGenre in moviesGenres {
-            genres += "\(movieGenre.name ?? ""), "
-        }
-        
-        return genres
+
+        return formatGenres()
     }
     
     func findAllGenres() {
-        viewModelMovie.getAllGenres { (genres, error) in
+        viewModelMovie.getAllGenres { [weak self] (genres, error) in
             if let genres = genres {
                 DispatchQueue.main.async {
-                    self.allGenres = genres
+                    self?.allGenres = genres
                 }
             }
         }
+    }
+    
+    func formatGenres() -> String {
+        var formatGenres: String = ""
+        
+        let genres = moviesGenres.prefix(2)
+
+        for genre in genres {
+            formatGenres += "\(genre.name ?? ""), "
+        }
+
+        return String(formatGenres.dropLast(2))
     }
     
     func setupCellImage() {

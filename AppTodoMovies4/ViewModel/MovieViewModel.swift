@@ -24,7 +24,7 @@ class MovieViewModel {
         ]
         
         guard let request = urlAllMovies?.url else { return }
-        print(request)
+
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 completion(nil, error)

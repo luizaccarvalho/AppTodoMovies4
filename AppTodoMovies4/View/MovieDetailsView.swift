@@ -1,5 +1,5 @@
 //
-//  MovieDetails.swift
+//  MovieDetailsView.swift
 //  AppTodoMovies4
 //
 //  Created by Luiza  Carvalho on 14/11/21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetails: UIView {
+class MovieDetailsView: UIView {
     var viewModelMovie = MovieViewModel()
     var movieDetails: Movie?
     
@@ -85,8 +85,11 @@ class MovieDetails: UIView {
         self.movieDetails = movie
         self.titleLabel.text = movie.originalTitle
         
-        self.popularityLabel.text = "\(movie.popularity ?? 0.0)"
-        self.voteCountLabel.text = "\(movie.voteCount ?? 0) Likes"
+        var voteCount: String = formatValues(value: Double(movie.voteCount ?? 0))
+        var popularity: String = formatValues(value: movie.popularity)
+        
+        self.popularityLabel.text = "\(popularity)"
+        self.voteCountLabel.text = "\(voteCount) Likes"
     }
     
     func setupImage(_ movie: Movie) {
@@ -102,6 +105,24 @@ class MovieDetails: UIView {
             } catch {
                 print(error)
             }
+        }
+    }
+    
+    func formatValues(value: Double?) -> String {
+        let number = value ?? 0.0
+        
+        let thousand = number / 1000
+        let million = number / 1000000
+        let billion = number / 1000000000
+        
+        if billion >= 1.0 {
+            return "\(round(billion*10)/10)B"
+        } else if million >= 1.0 {
+            return "\(round(million*10)/10)M"
+        } else if thousand >= 1.0 {
+            return "\(round(thousand*10)/10)K"
+        } else {
+            return "\(Int(number))"
         }
     }
 }
