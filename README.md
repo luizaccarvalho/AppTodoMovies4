@@ -20,11 +20,10 @@ Status do Projeto: Em desenvolvimento ⚠
    * [Linguagens, libs e frameworks](#linguagens-libs-e-frameworks)
    
 ## Features 🛠
-- [x] View de detalhes do filme escolhido
-- [x] View de listagem de filmes similares ao escolhido
-- [X] Layout construido atraves do Swift UI e com ViewCode
-- [X] Consumida API [The Movie Database](https://www.themoviedb.org/) para trazer as informações do filme
-- [ ] Layout responsivo em outros versões dos aparelhos
+- [x] Tela de detalhes do filme escolhido construida com ViewCode e SwiftUI
+- [x] Tela de listagem de filmes similares ao escolhido com ViewCode e SwiftUI
+- [X] Consumir API [The Movie Database](https://www.themoviedb.org/) para trazer as informações do filme
+- [ ] Layout responsivo em outros versões do Iphone
 - [ ] Utilizar lib do Alamofire para consumir dados da rota do [The Movie Database](https://www.themoviedb.org/)
 - [ ] Utilizar lib do RxSwift para construir o layout da tela
 
@@ -42,7 +41,7 @@ O projeto foi desenvolvido com a versão 12.4. da IDE.
 
 No terminal, clone o projeto:
 
-    git clone git@github.com:luizaccarvalho/AppTodoMovies4.git
+    SSH: git clone git@github.com:luizaccarvalho/AppTodoMovies4.git
     
 Entre na pasta do projeto
 
@@ -54,6 +53,7 @@ Em breve darei continuidade ao projeto e assim passando a utilizar as libs Alamo
 ao projeto.
 
 ## Como testar 📱
+Abra o projeto atraves da IDE do Xcode 
 Antes de rodar o projeto, escolher o modelo Iphone 8.
 Em seguida rodar pelo compilador do Xcode, irá carregar a primeira e unica tela
 com detalhes do filme Fight Club - Clube da Luta - (1999) e uma tabela com a listagem dos filmes similares a ele.
