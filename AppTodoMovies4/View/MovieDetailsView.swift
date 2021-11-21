@@ -11,7 +11,7 @@ class MovieDetailsView: UIView {
     var viewModelMovie = MovieViewModel()
     var movieDetails: Movie?
     
-    let bannerImageView: UIImageView = .iconeImageView(width: 220, height: 320)
+    let bannerImageView: UIImageView = UIImageView()
     let iconFavorite: UIButton = UIButton()
     let titleLabel: UILabel = .textLabel(text: "Title Movie", fontSize: 25, numberOfLines: 2)
     let iconPopularity = UIImageView.iconeImageView(width: 14, height: 14)
@@ -47,7 +47,7 @@ class MovieDetailsView: UIView {
 
         let detailsStackView = UIStackView(arrangedSubviews: [voteCountStackView,
                                                               popularityStackView])
-        //detailsStackView.distribution = .fill
+        detailsStackView.distribution = .fill
         detailsStackView.axis = .horizontal
         detailsStackView.alignment = .top
         
@@ -59,7 +59,7 @@ class MovieDetailsView: UIView {
         let stackView = UIStackView(arrangedSubviews: [bannerImageView, titleStackView, detailsStackView])
         stackView.distribution = .fill
         stackView.axis = .vertical
-        stackView.spacing = 2
+        stackView.spacing = 10
         stackView.backgroundColor = .black
 
         self.addSubview(stackView)
@@ -85,8 +85,8 @@ class MovieDetailsView: UIView {
         self.movieDetails = movie
         self.titleLabel.text = movie.originalTitle
         
-        var voteCount: String = formatValues(value: Double(movie.voteCount ?? 0))
-        var popularity: String = formatValues(value: movie.popularity)
+        let voteCount: String = formatValues(value: Double(movie.voteCount ?? 0))
+        let popularity: String = formatValues(value: movie.popularity)
         
         self.popularityLabel.text = "\(popularity)"
         self.voteCountLabel.text = "\(voteCount) Likes"

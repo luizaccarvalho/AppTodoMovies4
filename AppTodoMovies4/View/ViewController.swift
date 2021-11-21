@@ -72,10 +72,6 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource, UIScrollViewDelegate, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return .init(10)
-//    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return similarMovies.count
     }
@@ -84,7 +80,7 @@ extension ViewController: UITableViewDataSource, UIScrollViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MovieCell
         cell.movie = self.similarMovies[indexPath.item]
         cell.layer.borderWidth = CGFloat(6)
-        cell.layer.borderColor = tableView.backgroundColor?.cgColor
+        //cell.layer.borderColor = tableView.backgroundColor?.cgColor
         return cell
     }
     

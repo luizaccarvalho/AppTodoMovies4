@@ -57,7 +57,7 @@ class MovieCell: UITableViewCell {
         let genreLabel = setupCellGenre()
         
         titleLabel.text = movie?.originalTitle
-        dateAndGenresLabel.text = "\(dateLabel ?? "") \(genreLabel ?? "")"
+        dateAndGenresLabel.text = "\(dateLabel) \(genreLabel)"
     }
     
     func setupCellDate() -> String {
