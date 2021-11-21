@@ -7,15 +7,24 @@
 
 import Foundation
 
-struct Results: Codable {
+struct Paged: Codable {
+    let page: Int
+    let totalPages: Int
+    let totalResults: Int
     let results: [Movie]
     
     enum CodingKeys: String, CodingKey {
+        case page = "page"
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
         case results = "results"
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
+        page = try values.decode(Int.self, forKey: .page)
+        totalPages = try values.decode(Int.self, forKey: .totalPages)
+        totalResults = try values.decode(Int.self, forKey: .totalResults)
         results = try values.decode([Movie].self, forKey: .results)
     }
 }
@@ -23,7 +32,7 @@ struct Results: Codable {
 struct Movie: Codable {
     let backdropPath: String?
     let posterPath: String?
-    let genres: [Genres]?
+    let genres: [Genre]?
     let id: Int?
     let originalTitle: String?
     let popularity: Double?
@@ -47,7 +56,7 @@ struct Movie: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         backdropPath = try values.decodeIfPresent(String.self, forKey: .backdropPath)
         posterPath = try values.decodeIfPresent(String.self, forKey: .posterPath)
-        genres = try values.decodeIfPresent([Genres].self, forKey: .genres)
+        genres = try values.decodeIfPresent([Genre].self, forKey: .genres)
         id = try values.decodeIfPresent(Int.self, forKey: .id)
         originalTitle = try values.decodeIfPresent(String.self, forKey: .originalTitle)
         popularity = try values.decodeIfPresent(Double.self, forKey: .popularity)
