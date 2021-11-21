@@ -57,21 +57,27 @@ No terminal, clone o projeto:
 Entre na pasta do projeto
 
     cd AppTodoMovies4
+    
+No terminal dentro da pasta do projeto digite
+
+    xed .
+    
+Esse comando abre o arquivo do projeto direto na IDE Xcode.
+Se caso nao der certo, abra a pasta do projeto AppTodoMovies4 e clique no arquivo `AppTodoMovies4.xcworkspace`
 
 ATENÇÃO: 
-No projeto possui a dependencia cocoapods instalado e as libs Alamofire e RxSwift, atualmente o projeto não as utiliza.
-Em breve darei continuidade ao projeto e assim passando a utilizar as libs Alamofire e RxSwift para agregar ainda mais 
-ao projeto.
+No projeto possui a dependencia cocoapods e instalado as libs Alamofire e RxSwift, atualmente o projeto não as utiliza.
+A utilizacao das libs Alamofire e RxSwift sao features a serem feitas para contribuir ainda mais com a utilizacao do projeto.
 
 ## Como testar 📱
-Abra o projeto atraves da IDE do Xcode 
-Antes de rodar o projeto, escolher o modelo Iphone 8.
+Com o projeto aberto pela IDE do Xcode,
+antes de rodar o projeto, escolher o modelo Iphone 8.
 Em seguida rodar pelo compilador do Xcode, irá carregar a primeira e unica tela
 com detalhes do filme Fight Club - Clube da Luta - (1999) e uma tabela com a listagem dos filmes similares a ele.
 
 ![Captura de Tela 2021-11-21 às 19 20 48](https://user-images.githubusercontent.com/55067295/142781778-cb4ad87a-f54a-4f8e-ba8f-5330b99f5042.png)
 
-* É necessario clicar na tabela e recarregar para que ela seja carregada.
+🚨 obs: É necessario clicar na tabela e arrastar para baixo para que sejam carregado os filmes similares.
 
 ## Linguagens, libs e frameworks ⚙
 - [Swift](https://developer.apple.com/documentation/swift): versão 5.3.2 
