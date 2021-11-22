@@ -23,47 +23,7 @@ class MovieDetailsView: UIView {
         super.init(frame: frame)
 
         findMovie()
-                
-        let imageFavorite = UIImage(named: "favorite")
-        let imageFavoriteBorder = UIImage(named: "favorite-border")
-        iconFavorite.setImage(imageFavorite, for: .normal)
-        iconFavorite.setImage(imageFavoriteBorder, for: .highlighted)
-        
-        iconPopularity.image = UIImage(named: "star")
-        iconVoteCount.image = UIImage(named: "favorite")
-        
-        titleLabel.textAlignment = NSTextAlignment.left
-        
-        let popularityStackView = UIStackView(arrangedSubviews:[iconPopularity,
-                                                                popularityLabel])
-        popularityStackView.distribution = .fill
-        popularityStackView.axis = .horizontal
-        popularityStackView.setCustomSpacing(5, after: iconPopularity)
-        
-        let voteCountStackView = UIStackView(arrangedSubviews:[iconVoteCount, voteCountLabel])
-        voteCountStackView.distribution = .fill
-        voteCountStackView.axis = .horizontal
-        voteCountStackView.setCustomSpacing(5, after: iconVoteCount)
-
-        let detailsStackView = UIStackView(arrangedSubviews: [voteCountStackView,
-                                                              popularityStackView])
-        detailsStackView.distribution = .fill
-        detailsStackView.axis = .horizontal
-        detailsStackView.alignment = .top
-        
-        let titleStackView = UIStackView(arrangedSubviews: [titleLabel, iconFavorite])
-        titleStackView.distribution = .equalCentering
-        titleStackView.axis = .horizontal
-        titleStackView.alignment = .top
-        
-        let stackView = UIStackView(arrangedSubviews: [bannerImageView, titleStackView, detailsStackView])
-        stackView.distribution = .fill
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.backgroundColor = .black
-
-        self.addSubview(stackView)
-        stackView.superviewFill()
+        setupViews()
     }
     
     required init?(coder: NSCoder) {
@@ -71,7 +31,7 @@ class MovieDetailsView: UIView {
     }
     
     func findMovie() {
-        viewModelMovie.getMovieData() { (movie, err) in
+        viewModelMovie.getMovieData() { [weak self] (movie, err) in
             if let movie = movie {
                 DispatchQueue.main.async { [weak self] in
                     self?.setupViewData(movie)
@@ -124,5 +84,71 @@ class MovieDetailsView: UIView {
         } else {
             return "\(Int(number))"
         }
+    }
+    
+    func setupPopularityStackView() -> UIStackView {
+        iconPopularity.image = UIImage(named: "star")
+
+        let popularityStackView = UIStackView(arrangedSubviews:[iconPopularity,
+                                                                popularityLabel])
+        popularityStackView.distribution = .fill
+        popularityStackView.axis = .horizontal
+        popularityStackView.setCustomSpacing(5, after: iconPopularity)
+        
+        return popularityStackView
+    }
+    
+    func setupVoteCountStackView() -> UIStackView {
+        iconVoteCount.image = UIImage(named: "favorite")
+
+        let voteCountStackView = UIStackView(arrangedSubviews:[iconVoteCount, voteCountLabel])
+        voteCountStackView.distribution = .fill
+        voteCountStackView.axis = .horizontal
+        voteCountStackView.setCustomSpacing(5, after: iconVoteCount)
+        
+        return voteCountStackView
+    }
+    
+    func setupDetailsStackView() -> UIStackView {
+        let popularityStackView = setupPopularityStackView()
+        let voteCountStackView = setupVoteCountStackView()
+        
+        let detailsStackView = UIStackView(arrangedSubviews: [voteCountStackView,
+                                                              popularityStackView])
+        detailsStackView.distribution = .fill
+        detailsStackView.axis = .horizontal
+        detailsStackView.alignment = .top
+        
+        return detailsStackView
+    }
+    
+    func setupTitleStackView() -> UIStackView {
+        let imageFavorite = UIImage(named: "favorite")
+        let imageFavoriteBorder = UIImage(named: "favorite-border")
+        iconFavorite.setImage(imageFavorite, for: .normal)
+        iconFavorite.setImage(imageFavoriteBorder, for: .highlighted)
+                
+        titleLabel.textAlignment = NSTextAlignment.left
+
+        let titleStackView = UIStackView(arrangedSubviews: [titleLabel, iconFavorite])
+        titleStackView.distribution = .equalCentering
+        titleStackView.axis = .horizontal
+        titleStackView.alignment = .top
+        
+        return titleStackView
+    }
+    
+    func setupViews() {
+        let detailsStackView = setupDetailsStackView()
+        let titleStackView = setupTitleStackView()
+        
+        let stackView = UIStackView(arrangedSubviews: [bannerImageView, titleStackView, detailsStackView])
+        stackView.distribution = .fill
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.backgroundColor = .black
+
+        self.addSubview(stackView)
+        stackView.superviewFill()
     }
 }
