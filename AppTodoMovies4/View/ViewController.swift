@@ -48,15 +48,15 @@ class ViewController: UIViewController {
     }
     
     func getAllMovies(page: Int = 1) {
-        viewModelMovie.getAllMoviesData(page: page) { (movies, err) in
+        viewModelMovie.getAllMoviesData(page: page) { [weak self] (movies, err) in
             if let movies = movies {
                 DispatchQueue.main.async {
-                    self.currentPage = movies.page
-                    self.totalPages = movies.totalPages
-                    self.totalResults = movies.totalResults
+                    self?.currentPage = movies.page
+                    self?.totalPages = movies.totalPages
+                    self?.totalResults = movies.totalResults
                     
-                    self.similarMovies.append(contentsOf: movies.results)
-                    self.tableView.reloadData()
+                    self?.similarMovies.append(contentsOf: movies.results)
+                    self?.tableView.reloadData()
                 }
             }
         }
@@ -80,7 +80,6 @@ extension ViewController: UITableViewDataSource, UIScrollViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MovieCell
         cell.movie = self.similarMovies[indexPath.item]
         cell.layer.borderWidth = CGFloat(6)
-        //cell.layer.borderColor = tableView.backgroundColor?.cgColor
         return cell
     }
     

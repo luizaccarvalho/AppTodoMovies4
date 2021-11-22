@@ -26,21 +26,7 @@ class MovieCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        iconCheck.image = UIImage(named: "check")
-             
-        let titleDetailsStackView = UIStackView(arrangedSubviews: [titleLabel, dateAndGenresLabel])
-        titleDetailsStackView.distribution = .fillEqually
-        titleDetailsStackView.alignment = .firstBaseline
-        titleDetailsStackView.axis = .vertical
-        titleDetailsStackView.spacing = 1
-        
-        let stackView = UIStackView(arrangedSubviews: [iconeImageView, titleDetailsStackView, iconCheck])
-        stackView.distribution = .equalCentering
-        stackView.backgroundColor = .black
-        stackView.axis = .horizontal
-        
-        addSubview(stackView)
-        stackView.superviewFill()
+        setupViews()
     }
     
     required init?(coder: NSCoder) {
@@ -127,5 +113,29 @@ class MovieCell: UITableViewCell {
                 print(error)
             }
         }
+    }
+    
+    func setupTitleDetailsStackView() -> UIStackView {
+        iconCheck.image = UIImage(named: "check")
+
+        let titleDetailsStackView = UIStackView(arrangedSubviews: [titleLabel, dateAndGenresLabel])
+        titleDetailsStackView.distribution = .fillEqually
+        titleDetailsStackView.alignment = .firstBaseline
+        titleDetailsStackView.axis = .vertical
+        titleDetailsStackView.spacing = 1
+    
+        return titleDetailsStackView
+    }
+    
+    func setupViews() {
+        let titleDetailsStackView = setupTitleDetailsStackView()
+        
+        let stackView = UIStackView(arrangedSubviews: [iconeImageView, titleDetailsStackView, iconCheck])
+        stackView.distribution = .equalCentering
+        stackView.backgroundColor = .black
+        stackView.axis = .horizontal
+        
+        addSubview(stackView)
+        stackView.superviewFill()
     }
 }
